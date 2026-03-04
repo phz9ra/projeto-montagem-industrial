@@ -1,0 +1,591 @@
+/* ============================================
+   SISTEMA DE MONITORAMENTO INDUSTRIAL
+   Estilos CSS
+   ============================================ */
+
+/* Reset e Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* ============================================
+   CABEÇALHO
+   ============================================ */
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* ============================================
+   STATUS DO SISTEMA
+   ============================================ */
+
+.status-section {
+    padding: 30px;
+    background: #f8f9fa;
+    border-bottom: 3px solid #e9ecef;
+}
+
+.status-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.status-card h3 {
+    color: #495057;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.status-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-badge.sem-turno {
+    background: #6c757d;
+    color: white;
+}
+
+.status-badge.ativo {
+    background: #28a745;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.status-badge.pausado {
+    background: #ffc107;
+    color: #333;
+}
+
+.status-badge.finalizado {
+    background: #dc3545;
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.status-text {
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+/* ============================================
+   SEÇÃO DE PRODUÇÃO
+   ============================================ */
+
+.production-section {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #667eea;
+}
+
+.card h3 {
+    color: #495057;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+/* Card de Produção */
+.production-card {
+    border-left-color: #28a745;
+}
+
+.production-display {
+    text-align: center;
+}
+
+.production-number {
+    font-size: 4em;
+    font-weight: bold;
+    color: #28a745;
+    line-height: 1;
+}
+
+.production-label {
+    color: #6c757d;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* Card de Meta */
+.meta-card {
+    border-left-color: #ffc107;
+}
+
+.meta-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.meta-number {
+    font-size: 4em;
+    font-weight: bold;
+    color: #ffc107;
+    line-height: 1;
+}
+
+.meta-label {
+    color: #6c757d;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.meta-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.input-meta {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.input-meta:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Card de Progresso */
+.progress-card {
+    border-left-color: #007bff;
+}
+
+.progress-container {
+    margin: 20px 0;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 30px;
+    background: #e9ecef;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.progress-text {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.meta-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
+.meta-status.atingida {
+    background: #d4edda;
+    color: #155724;
+}
+
+.meta-status-icon {
+    font-size: 1.5em;
+}
+
+.meta-status-text {
+    font-weight: bold;
+}
+
+/* ============================================
+   POSTOS DE TRABALHO
+   ============================================ */
+
+.postos-section {
+    padding: 30px;
+    background: #f8f9fa;
+}
+
+.postos-section h3 {
+    color: #495057;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.postos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.posto-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.posto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.posto-card.ativo {
+    border: 3px solid #28a745;
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
+}
+
+.posto-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.posto-numero {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: #667eea;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.posto-header h4 {
+    color: #495057;
+    font-size: 1.1em;
+}
+
+.posto-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.posto-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #dee2e6;
+}
+
+.posto-card.ativo .posto-indicator {
+    background: #28a745;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.posto-arrow {
+    font-size: 2em;
+    color: #667eea;
+}
+
+/* ============================================
+   CONTROLES DO TURNO
+   ============================================ */
+
+.controls-section {
+    padding: 30px;
+}
+
+.controls-section h3 {
+    color: #495057;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.controls-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.control-group label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.input-control {
+    padding: 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1em;
+    width: 200px;
+}
+
+.input-control:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* ============================================
+   BOTÕES
+   ============================================ */
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.btn-warning:hover {
+    background: #e0a800;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background: #138496;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-secondary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5568d3;
+}
+
+/* ============================================
+   LOGS DE ATIVIDADE
+   ============================================ */
+
+.logs-section {
+    padding: 30px;
+    background: #f8f9fa;
+}
+
+.logs-section h3 {
+    color: #495057;
+    margin-bottom: 20px;
+}
+
+.logs-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.log-entry {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-left: 3px solid #667eea;
+    background: #f8f9fa;
+}
+
+.log-entry.success {
+    border-left-color: #28a745;
+    background: #d4edda;
+}
+
+.log-entry.error {
+    border-left-color: #dc3545;
+    background: #f8d7da;
+}
+
+.log-entry.warning {
+    border-left-color: #ffc107;
+    background: #fff3cd;
+}
+
+.log-timestamp {
+    color: #6c757d;
+    font-size: 0.85em;
+}
+
+.log-empty {
+    text-align: center;
+    color: #6c757d;
+    padding: 20px;
+}
+
+/* ============================================
+   RODAPÉ
+   ============================================ */
+
+.footer {
+    background: #343a40;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    .production-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .postos-container {
+        flex-direction: column;
+    }
+    
+    .posto-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .controls-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .control-group {
+        width: 100%;
+    }
+}

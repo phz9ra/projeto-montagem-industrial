@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Monitoramento Industrial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Container Principal -->
+    <div class="container">
+        
+        <!-- Cabeçalho -->
+        <header class="header">
+            <h1>🏭 Sistema de Monitoramento Industrial</h1>
+            <p class="subtitle">Controle de Produção por Postos</p>
+        </header>
+
+        <!-- Status do Sistema -->
+        <section class="status-section">
+            <div class="status-card">
+                <h3>Status do Turno</h3>
+                <div class="status-indicator" id="statusIndicator">
+                    <span class="status-badge" id="statusBadge">SEM TURNO</span>
+                    <p class="status-text" id="statusText">Nenhum turno ativo no momento</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produção e Meta -->
+        <section class="production-section">
+            
+            <!-- Card de Produção Atual -->
+            <div class="card production-card">
+                <h3>📊 Produção Atual</h3>
+                <div class="production-display">
+                    <div class="production-number" id="producaoAtual">0</div>
+                    <div class="production-label">peças produzidas</div>
+                </div>
+            </div>
+
+            <!-- Card de Meta -->
+            <div class="card meta-card">
+                <h3>🎯 Meta de Produção</h3>
+                <div class="meta-display">
+                    <div class="meta-number" id="metaAtual">0</div>
+                    <div class="meta-label">peças planejadas</div>
+                </div>
+                
+                <!-- Formulário para alterar meta -->
+                <div class="meta-form">
+                    <input 
+                        type="number" 
+                        id="novaMeta" 
+                        placeholder="Nova meta" 
+                        min="1"
+                        class="input-meta"
+                    >
+                    <button onclick="atualizarMeta()" class="btn btn-secondary">
+                        Atualizar Meta
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card de Progresso -->
+            <div class="card progress-card">
+                <h3>📈 Progresso</h3>
+                <div class="progress-container">
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="percentualProgresso">0%</span>
+                    </div>
+                </div>
+                
+                <!-- Indicador de Meta Atingida -->
+                <div class="meta-status" id="metaStatus">
+                    <span class="meta-status-icon">⏳</span>
+                    <span class="meta-status-text">Em andamento</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Visualização dos Postos -->
+        <section class="postos-section">
+            <h3>🔧 Status dos Postos de Trabalho</h3>
+            <div class="postos-container">
+                
+                <div class="posto-card" id="posto1">
+                    <div class="posto-header">
+                        <span class="posto-numero">1</span>
+                        <h4>Posto Inicial</h4>
+                    </div>
+                    <div class="posto-status">
+                        <span class="posto-indicator"></span>
+                        <p>Aguardando...</p>
+                    </div>
+                </div>
+
+                <div class="posto-arrow">➜</div>
+
+                <div class="posto-card" id="posto2">
+                    <div class="posto-header">
+                        <span class="posto-numero">2</span>
+                        <h4>Montagem</h4>
+                    </div>
+                    <div class="posto-status">
+                        <span class="posto-indicator"></span>
+                        <p>Aguardando...</p>
+                    </div>
+                </div>
+
+                <div class="posto-arrow">➜</div>
+
+                <div class="posto-card" id="posto3">
+                    <div class="posto-header">
+                        <span class="posto-numero">3</span>
+                        <h4>Finalização</h4>
+                    </div>
+                    <div class="posto-status">
+                        <span class="posto-indicator"></span>
+                        <p>Aguardando...</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Controles do Turno -->
+        <section class="controls-section">
+            <h3>⚙️ Controle do Turno</h3>
+            
+            <div class="controls-container">
+                
+                <!-- Iniciar Turno -->
+                <div class="control-group">
+                    <label for="metaInicial">Meta Inicial:</label>
+                    <input 
+                        type="number" 
+                        id="metaInicial" 
+                        value="100" 
+                        min="1"
+                        class="input-control"
+                    >
+                    <button onclick="iniciarTurno()" class="btn btn-success" id="btnIniciar">
+                        ▶️ Iniciar Turno
+                    </button>
+                </div>
+
+                <!-- Pausar/Retomar Turno -->
+                <div class="control-group">
+                    <button onclick="pausarTurno()" class="btn btn-warning" id="btnPausar" disabled>
+                        ⏸️ Pausar Turno
+                    </button>
+                    <button onclick="retomarTurno()" class="btn btn-info" id="btnRetomar" disabled style="display: none;">
+                        ▶️ Retomar Turno
+                    </button>
+                </div>
+
+                <!-- Finalizar Turno -->
+                <div class="control-group">
+                    <button onclick="finalizarTurno()" class="btn btn-danger" id="btnFinalizar" disabled>
+                        ⏹️ Finalizar Turno
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Logs de Atividade -->
+        <section class="logs-section">
+            <h3>📋 Log de Atividades</h3>
+            <div class="logs-container" id="logsContainer">
+                <p class="log-empty">Nenhuma atividade registrada ainda...</p>
+            </div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>Sistema de Monitoramento Industrial v1.0 | Projeto Acadêmico SENAI</p>
+        </footer>
+
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
