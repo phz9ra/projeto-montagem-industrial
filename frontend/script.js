@@ -8,7 +8,7 @@
 // CONFIGURAÇÕES E VARIÁVEIS GLOBAIS
 // ============================================
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'http://localhost:3000/api';
 const INTERVALO_ATUALIZACAO = 2000; // 2 segundos
 let intervaloAtualizacao = null;
 
@@ -101,7 +101,18 @@ async function fazerRequisicaoPOST(endpoint, corpo = {}) {
  */
 async function atualizarDados() {
     await atualizarProducao();
-    await atualizarMeta();
+    await buscarMetaAtual();
+}
+
+/**
+ * Busca a meta atual no backend
+ */
+async function buscarMetaAtual() {
+    const resultado = await fazerRequisicaoGET('/meta');
+    
+    if (resultado.sucesso && resultado.dados.meta !== null) {
+        document.getElementById('metaAtual').textContent = resultado.dados.meta;
+    }
 }
 
 /**
@@ -363,7 +374,7 @@ async function finalizarTurno() {
 /**
  * Atualiza a meta do turno atual
  */
-async function atualizarMeta() {
+async function enviarNovaMeta() {
     const novaMeta = parseInt(document.getElementById('novaMeta').value);
     
     if (!novaMeta || novaMeta <= 0) {

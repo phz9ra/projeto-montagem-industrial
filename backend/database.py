@@ -146,7 +146,10 @@ def finalizar_turno(turno_id):
         
         # Obter dados do turno
         cursor.execute("SELECT * FROM turnos WHERE id = ?", (turno_id,))
-        turno = dict(cursor.fetchone())
+        row = cursor.fetchone()
+        if row is None:
+            raise ValueError(f"Turno {turno_id} não encontrado no banco de dados")
+        turno = dict(row)
         
         # Atualizar status
         cursor.execute("""

@@ -11,7 +11,7 @@ import time
 
 # ============================================
 # CONFIGURAÇÕES
-# ============================================a
+# ============================================
 
 PORTA_SERIAL = 'COM4'       # Porta do Arduino
 BAUD_RATE    = 9600          # Deve ser igual ao Serial.begin() do Arduino
@@ -36,7 +36,7 @@ def registrar_evento_posto(posto_id: int):
         dados = resposta.json()
 
         if dados.get('sucesso'):
-            print(f'[Serial] ✓ Posto {posto_id} registrado | Produção: {dados.get("producao_atual", {}).get("total_pecas", "?")}')
+            print(f'[Serial] ✓ Posto {posto_id} registrado | Produção: {dados.get("producao_atual", {}).get("producao_realizada", "?")}')
         else:
             print(f'[Serial] ✗ Posto {posto_id} recusado: {dados.get("mensagem")}')
 

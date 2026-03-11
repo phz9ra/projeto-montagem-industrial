@@ -150,8 +150,36 @@ export async function obterHistorico(limite = 10) {
   >(`/historico?limite=${limite}`)
 }
 
+export async function obterUltimoPosto() {
+  return apiRequest<{
+    sucesso: boolean
+    turno_ativo: boolean
+    turno_status?: string
+    ultimo_posto: number
+    proximo_posto: number
+    producao_realizada?: number
+    meta_producao?: number
+  }>('/sensor/ultimo')
+}
+
 export async function healthCheck() {
   return apiRequest<{ status: string; mensagem: string; timestamp: string }>(
     "/health"
   )
+}
+
+// Objetos auxiliares para compatibilidade com a UI existente
+export const turnoAPI = {
+  iniciar: iniciarTurno,
+  pausar: pausarTurno,
+  retomar: retomarTurno,
+  finalizar: finalizarTurno,
+}
+
+export const producaoAPI = {
+  atual: obterProducaoAtual,
+  meta: obterMeta,
+  atualizar: atualizarMeta,
+  estatisticas: obterEstatisticas,
+  historico: obterHistorico,
 }

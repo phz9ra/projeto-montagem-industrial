@@ -44,11 +44,12 @@ def iniciar_turno():
         meta_producao = dados.get('meta_producao', 100)
         
         # Validar meta
-        if not isinstance(meta_producao, int) or meta_producao <= 0:
+        if not isinstance(meta_producao, (int, float)) or meta_producao <= 0:
             return jsonify({
                 'sucesso': False,
                 'mensagem': 'Meta de produção deve ser um número inteiro positivo'
             }), 400
+        meta_producao = int(meta_producao)
         
         # Criar novo turno
         turno_id = db.criar_turno(meta_producao)
@@ -372,11 +373,12 @@ def atualizar_meta():
         nova_meta = dados['meta']
         
         # Validar meta
-        if not isinstance(nova_meta, int) or nova_meta <= 0:
+        if not isinstance(nova_meta, (int, float)) or nova_meta <= 0:
             return jsonify({
                 'sucesso': False,
                 'mensagem': 'Meta deve ser um número inteiro positivo'
             }), 400
+        nova_meta = int(nova_meta)
         
         # Atualizar meta
         db.atualizar_meta_turno(turno_ativo['id'], nova_meta)
@@ -455,6 +457,49 @@ def obter_historico():
         return jsonify({
             'sucesso': False,
             'mensagem': f'Erro ao obter histórico: {str(e)}'
+        }), 500
+
+
+# ============================================
+# ENDPOINT DE SENSOR - ÚLTIMO POSTO
+# ============================================
+
+@api.route('/sensor/ultimo', methods=['GET'])
+def obter_ultimo_posto():
+    """
+    Retorna o último posto acionado no turno ativo e o próximo esperado.
+
+    Returns:
+        JSON com ultimo_posto, proximo_posto e status do turno
+    """
+    try:
+        turno_ativo = db.obter_turno_ativo()
+
+        if not turno_ativo:
+            return jsonify({
+                'sucesso': True,
+                'turno_ativo': False,
+                'ultimo_posto': 0,
+                'proximo_posto': 1,
+            }), 200
+
+        ultimo = db.obter_ultimo_evento_posto(turno_ativo['id'])
+        proximo = (ultimo % 3) + 1 if ultimo > 0 else 1
+
+        return jsonify({
+            'sucesso': True,
+            'turno_ativo': True,
+            'turno_status': turno_ativo['status'],
+            'ultimo_posto': ultimo,
+            'proximo_posto': proximo,
+            'producao_realizada': turno_ativo['producao_realizada'],
+            'meta_producao': turno_ativo['meta_producao'],
+        }), 200
+
+    except Exception as e:
+        return jsonify({
+            'sucesso': False,
+            'mensagem': f'Erro ao obter último posto: {str(e)}'
         }), 500
 
 
