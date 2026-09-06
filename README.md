@@ -75,6 +75,6 @@ Aplicar conceitos de desenvolvimento web, organização em camadas, persistênci
 
 <div align="center">
 
-Desenvolvido por **Pedro Henrique** · [@phz9ra](https://github.com/phz9ra)
+Desenvolvido por **Pedro Henrique** · [@phz9ra](https://github.com/phz9ra) **&& Gustavo Rodrigues** · [@grnex](https://github.com/grnex)
 
 </div>
